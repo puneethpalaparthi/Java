@@ -1,101 +1,77 @@
-import java.util.*;
+import java.util.Scanner;
 
-class Bs
-{    
-    
-    public static void swap(int[] ar, int i, int j)
-    {
-        int temp = ar[i];
-        ar[i] = ar[j];
-        ar[j] = temp;
-    }
+public class Binary_search {
 
-    public static void readarr(int[] ar, int n)
-    {
+    static void readarr(int ar[], int n) {
         Scanner sc = new Scanner(System.in);
-        for (int i = 0; i < n; i++)
-        {
+        for (int i = 0; i < n; i++) {
             ar[i] = sc.nextInt();
         }
     }
 
-  
-    public static void printarr(int[] ar, int n)
-    {
-        for (int i = 0; i < n; i++)
-        {
-            System.out.println(ar[i]);
+    static void printarr(int ar[], int n) {
+        for (int i = 0; i < n; i++) {
+            System.out.printf("%d\t", ar[i]);
         }
+        System.out.println();
     }
-    
-  
-    public static void sort(int[] ar, int n)
-    {
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = i + 1; j < n; j++)
-            {
-                if (ar[i] > ar[j])
-                {
-                    swap(ar, i, j);
+
+    public static void swap(int[] a, int[] b) {
+        int temp = a[0];
+        a[0] = b[0];
+        b[0] = temp;
+    }
+
+    public static void sort(int ar[], int n) {
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (ar[i] > ar[j]) {
+                    int[] a = {ar[i]};
+                    int[] b = {ar[j]};
+                    swap(a, b);
+                    ar[i] = a[0];
+                    ar[j] = b[0];
                 }
             }
         }
     }
-    
-  
-    public static void search(int[] ar, int n, int key)
-    {
-        int start = 0, end = n - 1, mid, pos = -1;
+
+    public static void search(int ar[], int n, int key) {
+        int start = 0, end = n - 1, mid;
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the key to find the position:");
         key = sc.nextInt();
         
-        while (start <= end)
-        {
+        while (start <= end) {
             mid = (start + end) / 2;
-            if (key == ar[mid])
-            {
-                pos = mid;
-                break;
-            }
-            else if (key < ar[mid])
-            {
+            if (key == ar[mid]) {
+                System.out.printf("The key %d is found at the position=%d%n", key, mid + 1);
+                return;
+            } else if (key < ar[mid]) {
                 end = mid - 1;
-            }
-            else 
-            {
+            } else {
                 start = mid + 1;
             }
         }
-        if (pos >= 0)
-        {
-            System.out.println("The key is found at index: " + pos);
-        }
-        else
-        {
-            System.out.println("The key is not found");
-        }
+        System.out.println("The key is not found");
     }
-    
-    public static void main(String[] args)
-    {
-        int[] ar = new int[100];
+
+    public static void main(String[] args) {
         int n, key;
-        
+        int[] arr = new int[100];
         Scanner sc = new Scanner(System.in);
+        
         System.out.println("Enter the number of elements:");
         n = sc.nextInt();
         
-        System.out.println("Enter the elements of array:");
-        readarr(ar, n);
+        System.out.println("Enter the elements of the array:");
+        readarr(arr, n);
         
-        sort(ar, n);
+        sort(arr, n);
         
         System.out.println("The array after sorting:");
-        printarr(ar, n);
+        printarr(arr, n);
         
-        
-        search(ar, n, key);
+        search(arr, n, 0);
     }
 }
