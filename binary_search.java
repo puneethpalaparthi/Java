@@ -42,7 +42,7 @@ public class Binary
 		System.out.println("enter the key to search : ");
 		key=sc.nextInt();
 		boolean found = false;
-		while(start<end)
+		while(start<=end)
 		{
 			mid=(start+end)/2;
 			if(key==a[mid])
