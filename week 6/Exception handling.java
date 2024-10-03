@@ -15,3 +15,17 @@ class Exe
         }
     }
 }
+
+
+//output
+1
+1
+1
+1
+1
+2
+2
+3
+5
+10
+Cannot divide by zero.
