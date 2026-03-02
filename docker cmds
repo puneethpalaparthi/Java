@@ -1,0 +1,54 @@
+Experiment: Creating and Running a Docker Container on Windows
+
+Aim
+To create a Docker image using a Dockerfile and run it as a container in Windows using Docker Desktop.
+Software Required
+Windows 10/11
+Docker Desktop (WSL2 backend enabled)
+PowerShell
+ Theory
+Dockerfile → Recipe to build image
+Docker Image → Packaged application
+Docker Container → Running instance of image
+Flow: Dockerfile → Build → Image → Run → Container
+Procedure:
+Step 1: Verify Docker Installation
+docker --version
+docker info
+
+Step 2: Create Project Directory
+mkdir docker-demo
+cd docker-demo
+
+Step 3: Create Python Application
+notepad app.py
+Add:
+print("HELLO WORLD! Docker is working correctly.")
+Save and close.
+
+Step 4: Create Dockerfile
+notepad Dockerfile
+Add:
+FROM python:3.11-slim
+WORKDIR /app
+COPY app.py .
+CMD ["python", "app.py"]
+Ensure file name is exactly Dockerfile (no .txt extension)
+Step 5: Build Docker Image
+docker build -t mydemo:v1 .
+Verify image:
+docker images
+Step 6: Run Docker Container
+docker run --name mydemo_container mydemo:v1
+Expected Output:
+HELLO WORLD! Docker is working correctly.
+
+Step 7: View Containers
+docker ps -a
+
+Step 8: Cleanup (Optional)
+docker rm -f mydemo_container
+docker rmi -f mydemo:v1
+
+Expected Result
+Successfully created a Docker image and executed it as a container displaying Hello World message.
